@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { WikipediaService } from './wikipedia.service';
 
 @Component({
@@ -13,8 +12,13 @@ export class AppComponent {
   pages = [];
 
   onTerm(term) {
-    this.wikipediaService.search(term).subscribe((response: any) => {
-      this.pages = response.query.search;
-    });
+    this.wikipediaService.search(term).subscribe(
+      (response: any) => {
+        this.pages = response;
+      },
+      (error) => {
+        console.log(error.message);
+      }
+    );
   }
 }
